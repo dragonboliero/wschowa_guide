@@ -1,0 +1,142 @@
+#:import MapView kivy.garden.mapview.MapView
+
+GridLayout:
+    rows:3
+    BoxLayout:
+        size_hint_y:0.1
+        orientation:"horizontal"
+        GridLayout:
+            cols:6
+            MDIconButton:
+                icon:"arrow-left"
+                on_release:
+                    root.ids.content.opacity=0;app.disable_sound()
+            MDIconButton:
+                icon:"swap-horizontal"
+                on_release:app.change_user_pos();
+            MDTextField:
+                id:lat
+                text:'51.803840'
+            MDTextField:
+                id:lon
+                text:'16.316965'
+            MDIconButton:
+                id:play_sound
+                icon:"volume-high"
+                disabled:True
+                on_release: app.play_sound()
+    MapView:
+        id:mapa
+        lat: 51.808211
+        lon: 16.321750
+        zoom: 14
+        #size_hint_x:0.5
+        #size_hint_y:0.5
+        #User
+        MapMarker:
+            id:user
+            lat: 51.803840
+            lon: 16.316965
+            source:'data/img/user_neut.png'
+
+        #Ratusz
+        MapMarkerPopup:
+            id:ratusz
+            lat: 51.803840
+            lon: 16.316965
+            source:'data/img/box.png'
+            on_release:
+                root.ids.content.opacity = 1;app.audiofile_setup('ratusz')
+        #Fara            
+        MapMarkerPopup:
+            lat: 51.80453
+            lon: 16.31567
+            source:'data/img/box.png'
+        #Zamek
+        MapMarkerPopup:
+            lat: 51.803390
+            lon: 16.319230
+            source:'data/img/box.png'
+        #Klasztor
+        MapMarkerPopup:
+            lat: 51.807023
+            lon: 16.314377
+            source:'data/img/box.png'
+        #Lapidarium
+        MapMarkerPopup:
+            lat: 51.808490
+            lon: 16.318390
+            source:'data/img/box.png'
+        #Byk Ilon
+        MapMarkerPopup:
+            lat: 51.816180
+            lon: 16.328315
+            source:'data/img/box.png'
+    BoxLayout:
+        orientation:'vertical'
+        
+        MDCard:
+            id:content
+            opacity:0
+            GridLayout:
+                rows:3
+                ScrollView:
+                    GridLayout: 
+                        size_hint_x: None
+                        rows: 1
+                        col_default_width: root.width
+                        width: self.minimum_width
+                        BoxLayout:
+                            orientation:"vertical"
+                            GridLayout:
+                                cols:3
+                                BoxLayout:
+                                    size_hint_x:0.2
+                                Button:
+                                    id:img1
+                                    background_normal: "data/img/ratusz_1.jpg"
+                                    background_down: "data/img/ratusz_1.jpg"
+                                    size_hint_x:0.6
+                                BoxLayout:
+                                    size_hint_x:0.2
+                            BoxLayout:
+                                size_hint_y:0.05
+                            MDLabel:
+                                text:"Widok na ratusz od strony plantów"
+                                size_hint_y:0.05
+                                halign:"center"
+                            BoxLayout:
+                                size_hint_y:0.05
+                        BoxLayout:
+                            orientation:"vertical"
+                            Image:
+                                source:'data/img/ratusz_3.jpg'
+                            BoxLayout:
+                                size_hint_y:0.05
+                            MDLabel:
+                                text:"Widok od strony parku"
+                                size_hint_y:0.05
+                                halign:"center"
+                            BoxLayout:
+                                size_hint_y:0.05
+                        BoxLayout:
+                            orientation:"vertical"
+                            Image:
+                                source:'data/img/ratusz_2.jpeg'
+                            BoxLayout:
+                                size_hint_y:0.05
+                            MDLabel:
+                                text:"Przedwojenne zdjęcie ratusza"
+                                size_hint_y:0.05
+                                halign:"center"
+                            BoxLayout:
+                                size_hint_y:0.05
+                BoxLayout:
+                    size_hint_y:0.05
+                ScrollView:
+                    MDLabel:
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+                        text:"Ratusz we Wschowie – najstarsza częścią ratusza jest monumentalna wieża pochodząca z XVI wieku. W latach 1860 budowli nadano obecny charakter neoromański. Jest to budynek murowany, trójkondygnacyjny, założony na rzucie prostokąta. W narożniku północno-zachodnim znajduje się wieża. Zachowała się na parterze w części północno-wschodniej sala nakryta późnogotyckim sklepieniem sieciowym (I połowa XV wieku)."
+                
